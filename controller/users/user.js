@@ -11,11 +11,11 @@ module.exports = {
 		user
 			.save()
 			.then(function(data){
-				res.header("Access-Control-Allow-Origin", "*");
+				//res.header("Access-Control-Allow-Origin", "*");
 				res.status(200).send({'message':'Created User'})
 			})
 			.catch(function(err){
-				res.header("Access-Control-Allow-Origin", "*");
+				//res.header("Access-Control-Allow-Origin", "*");
 				res.status(400).send({'err_msg':'Unable to Create User!'})
 			})
 	},
@@ -26,17 +26,17 @@ module.exports = {
 			.find({userName:userName,password:password})
 			.then(function(data){
 				if(data.length){
-					res.header("Access-Control-Allow-Origin", "*");
+					//res.header("Access-Control-Allow-Origin", "*");
 					res.status(200).send({
 						'username': data[0].userName
 					})		
 				}else{
-					res.header("Access-Control-Allow-Origin", "*");
+					//res.header("Access-Control-Allow-Origin", "*");
 					res.status(401).send({'message':'Invalid user!!'})
 				}
 			})
 			.catch(function(err){
-				res.header("Access-Control-Allow-Origin", "*");
+				//res.header("Access-Control-Allow-Origin", "*");
 				res.status(500).send({'message':'Something Went Wrong!!'})
 			})
 	}

@@ -3,6 +3,7 @@ const express    = require('express')
 const routes     = require('./routes/routes.js')
 const bodyParser = require('body-parser');
 const mongoose   = require('mongoose');
+const authCtrl   = require('./controller/auth/auth.js')
 const app        = express()
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,7 +25,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /**
  * Routes and server Configuration
  */
+app.all( "/*" , authCtrl.verifyUser);
 app.use('/api', routes);
+
 app.listen(config.dev.port, () => console.log(`Application Running on the Port : ${config.dev.port}!`))
 
 
