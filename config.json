@@ -1,0 +1,10 @@
+{
+	"dev": {
+		"port": "8001"
+	},
+	"prod": {},
+	"db": {
+		"db_url"  :"mongodb://127.0.0.1",
+		"db_name" :"todo"
+	}
+}
