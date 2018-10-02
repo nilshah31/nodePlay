@@ -6,6 +6,6 @@ router.route('/')
     .get(userController.getUsers)
     .post(userController.creaateUser)
 
-router.route('/validate').post(userController.validateUser)
+router.route('/login').post(userController.login)
 
 module.exports = router;

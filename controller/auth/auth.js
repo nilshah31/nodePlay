@@ -1,14 +1,23 @@
+const config = require('../../config.json')
+const jwt    = require('jsonwebtoken')
 module.exports = {
-  verifyUser : function(req,res,next){
+  verifyUser: function (req, res, next) {
     const authToken = req.get('authToken');
-    if(authToken){
-      console.log("AuthToken Is : ",authToken)
-      next()
-    }else{
-      res.status(403).send({
-        error_code :"403",
-        message    :"Valid authToken is required"
+    validateAuthToken(authToken)
+      .then(() => {
+        next()
       })
-    }  
+      .catch((err) => {
+        res.status(403).send({
+          error_code: "403",
+          message: "Valid authToken is required"
+        })
+      })
+  },
+  generateAuthToken: async function(user){
+    return jwt.sign({ user }, config.dev.secret_key);
   }
+}
+async function validateAuthToken(authToken) {
+  return jwt.verify(authToken, config.dev.secret_key)
 }
