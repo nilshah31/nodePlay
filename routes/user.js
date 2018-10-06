@@ -3,7 +3,7 @@ const express        = require('express')
 const router         = express.Router()
 
 router.route('/')
-    .get(userController.getUsers)
+    .get(userController.getUser)
     .post(userController.creaateUser)
 
 router.route('/login').post(userController.login)

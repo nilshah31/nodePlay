@@ -16,6 +16,9 @@ module.exports = {
   },
   generateAuthToken: async function(user){
     return jwt.sign({ user }, config.dev.secret_key);
+  },
+  getDecodedData: async function(authToken){
+    return jwt.decode(authToken)
   }
 }
 async function validateAuthToken(authToken) {

@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose   = require('mongoose');
 const authCtrl   = require('./controller/auth/auth.js')
 const app        = express()
+const cors       = require('cors');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,8 +25,10 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 /**
  * Routes and server Configuration
+ * cors will allow specified origin to access website 
  */
-app.all( "/*" , authCtrl.verifyUser);
+app.use(cors({origin: '*'}));
+app.all( "/api/task/*" , authCtrl.verifyUser);
 app.use('/api', routes);
 
 app.listen(config.dev.port, () => console.log(`Application Running on the Port : ${config.dev.port}!`))
